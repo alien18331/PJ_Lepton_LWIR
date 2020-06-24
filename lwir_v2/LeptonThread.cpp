@@ -2,10 +2,13 @@
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
+#include <stdio.h>
+#include <unistd.h>
 
 #include "Palettes.h"
 #include "SPI.h"
 #include "Lepton_I2C.h"
+#include "publisher.cpp"
 
 #define PACKET_SIZE 164
 #define PACKET_SIZE_UINT16 (PACKET_SIZE/2) //PACKET_SIZE_UINT16: 82
@@ -26,6 +29,10 @@ void LeptonThread::run()
 	int dataCount = 0;
 	float maxTemp = 0.0;
 	float tar_maxTemp = 0.0;
+	
+	const string message = "11122233341445566";
+	
+	MQTT_nodeInit();
 		
 	//std::ofstream fp;
 	//fp.open("tmpData.txt", ios::out); //std::ios_base::app
@@ -129,27 +136,13 @@ void LeptonThread::run()
 		} 
 		
 		tar_maxTemp = (((float) tar_maxValue * 0.0217)+32-177.77);
-		printf("\r%.2f", tar_maxTemp);		
-		fflush(stdout);
-		
-		//SetResult(tar_maxValue);
-		
-		// record result
-		//dataCount += 1;
-		//if (dataCount >= 5){
-			//SpiClosePort(0);
-			//fp << tar_maxTemp; 	 
-			//fp.close();
-			//std::exit(EXIT_SUCCESS);
-		//} else fp << tar_maxTemp << ",";
-		
-		//printf("\rmaxTemp:%.2f, maxValue: %d, tar_maxTemp:%.2f, tar_maxValue: %d", maxTemp, maxValue, tar_maxTemp, tar_maxValue);
 		//printf("\r%.2f", tar_maxTemp);		
 		//fflush(stdout);
 		
-		//cout << tar_maxTemp << endl;
-		//sleep(1);
-		
+		//float to string and publish
+		MQTT_Publish(to_string(tar_maxTemp));
+		usleep(200000);
+				
 		//target
 		for(int i=25; i<55; i++) { //col
 			for(int j=15; j<45; j++) { //row
@@ -157,7 +150,6 @@ void LeptonThread::run()
 			}			
 		}			
 		
-
 		//lets emit the signal for update
 		emit updateImage(myImage);
 	}

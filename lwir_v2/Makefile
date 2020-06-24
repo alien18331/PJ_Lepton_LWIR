@@ -16,7 +16,7 @@ CXXFLAGS      = -pipe -O2 -Wall -W -D_REENTRANT $(DEFINES)
 INCPATH       = -I/usr/share/qt4/mkspecs/linux-g++ -I. -I/usr/include/qt4/QtCore -I/usr/include/qt4/QtGui -I/usr/include/qt4 -I. -Iraspberrypi_libs -Igen_mocs
 LINK          = g++
 LFLAGS        = -Wl,-O1 
-LIBS          = $(SUBLIBS)  -L/usr/lib/arm-linux-gnueabihf -Lraspberrypi_libs/leptonSDKEmb32PUB/Debug -lLEPTON_SDK -lQtGui -lQtCore -lpthread 
+LIBS          = $(SUBLIBS)  -L/usr/lib/arm-linux-gnueabihf -Lraspberrypi_libs/leptonSDKEmb32PUB/Debug -lLEPTON_SDK -lQtGui -lQtCore -lpthread -l paho-mqtt3as -l paho-mqttpp3
 AR            = ar cqs
 RANLIB        = 
 QMAKE         = /usr/lib/arm-linux-gnueabihf/qt4/bin/qmake
@@ -46,7 +46,7 @@ OBJECTS_DIR   = gen_objs/
 SOURCES       = Lepton_I2C.cpp \
 		LeptonThread.cpp \
 		main.cpp \
-		mqtt.c mqtt_pal.c \
+		publisher.cpp \
 		MyLabel.cpp \
 		Palettes.cpp \
 		SPI.cpp gen_mocs/moc_LeptonThread.cpp \
