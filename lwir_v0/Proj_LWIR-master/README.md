@@ -1,2 +1,0 @@
-# leptontest
-# Proj-LWIR
