@@ -52,14 +52,14 @@ int main( int argc, char **argv )
 	//when the thread emits updateImage, the label should update its image accordingly
 	LeptonThread *thread = new LeptonThread();
 	
-	qDebug() << "start..";
+	//qDebug() << "start..";
 	QObject::connect(thread, SIGNAL(updateImage(QImage)), &myLabel, SLOT(setImage(QImage)));
 	
 	//connect ffc button to the thread's ffc action
 	QObject::connect(button1, SIGNAL(clicked()), thread, SLOT(performFFC()));
 	thread->start();
 	
-	myWidget->show();
+	//myWidget->show();
 	
 	return a.exec();
 }

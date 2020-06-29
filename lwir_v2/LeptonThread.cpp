@@ -30,9 +30,8 @@ void LeptonThread::run()
 	float maxTemp = 0.0;
 	float tar_maxTemp = 0.0;
 	
-	const string message = "11122233341445566";
-	
 	MQTT_nodeInit();
+	cout << "mqtt initial..done" << endl;
 		
 	//std::ofstream fp;
 	//fp.open("tmpData.txt", ios::out); //std::ios_base::app
@@ -42,7 +41,13 @@ void LeptonThread::run()
 
 	//open spi port
 	SpiOpenPort(0);
+	cout << "open spi port..done" << endl;
 	
+	
+	lepton_perform_ffc();
+	cout << "perform ffc..done" << endl;
+	
+	cout << "lepton lwir start.." << endl;
 	while(true) {
 
 		//read data packets from lepton over SPI
@@ -135,9 +140,9 @@ void LeptonThread::run()
 			}			
 		} 
 		
-		tar_maxTemp = (((float) tar_maxValue * 0.0217)+32-177.77);
-		//printf("\r%.2f", tar_maxTemp);		
-		//fflush(stdout);
+		tar_maxTemp = (((float) tar_maxValue * 0.0217) + 32 - 177.77);
+		printf("\rTarget temperature: %.2f *C  ", tar_maxTemp);		
+		fflush(stdout);
 		
 		//float to string and publish
 		MQTT_Publish(to_string(tar_maxTemp));
