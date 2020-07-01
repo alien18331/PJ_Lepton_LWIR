@@ -10,6 +10,12 @@ A: ambient temperature, default is 32
 X: target radiation  
 Y: target temperature  
   
+# guild  
+compiler: cmake && make  
+execute: ./raspberry_video  
+execute bash: run_start.sh  
+publisher.cpp: mqtt publisher  
+LeptonThread.cpp: lepton lwir function  
   
 # lwir_v0  
 # ========  
