@@ -137,16 +137,16 @@ void LeptonThread::run()
 			if((column >= 25 && column <= 55) && (row >= 15 && row <= 45)) {
 				if (frameBuffer[i] > tar_maxValue) tar_maxValue = frameBuffer[i];						
 				//if (frameBuffer[i] < tar_minValue) tar_minValue = frameBuffer[i];
-			}			
+			}	
 		} 
 		
-		tar_maxTemp = (((float) tar_maxValue * 0.0217) + 32 - 177.77);
+		tar_maxTemp = (((float) tar_maxValue * 0.0217) + 31 - 177.77);
 		printf("\rTarget temperature: %.2f *C  ", tar_maxTemp);		
 		fflush(stdout);
 		
 		//float to string and publish
 		MQTT_Publish(to_string(tar_maxTemp));
-		usleep(200000);
+		usleep(500000);
 				
 		//target
 		for(int i=25; i<55; i++) { //col
