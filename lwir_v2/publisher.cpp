@@ -18,6 +18,7 @@ void MQTT_Publish(string);
 void MQTT_terminated();
 
 const string DFLT_ADDRESS { "tcp://172.168.1.220:1883" };
+//~ const string DFLT_ADDRESS { "tcp://127.0.0.1:1883" };
 const string TOPIC { "12AP5_R408_COM_IR" };
 const int QOS = 1;
 

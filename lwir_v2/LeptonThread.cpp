@@ -15,8 +15,8 @@
 #define PACKETS_PER_FRAME 60
 #define FRAME_SIZE_UINT16 (PACKET_SIZE_UINT16 * PACKETS_PER_FRAME) //FRAME_SIZE_UINT16: 82*60=4920
 #define FPS 27;
-
-using namespace std;
+ 
+using namespace std; 
 
 LeptonThread::LeptonThread() : QThread(){
 }
